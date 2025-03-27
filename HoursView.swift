@@ -66,6 +66,20 @@ struct HoursView: View {
             .toolbar {
                 EditButton()
             }
+
+            // Recuadro para el total de horas del mes actual
+            VStack {
+                Text("TOTAL")
+                    .font(.system(size: 18, weight: .bold))
+                    .padding()
+                    .background(Color(hex: "e9edc9"))
+                    .cornerRadius(8)
+                    .padding(.horizontal)
+                
+                Text(formatHoursAndMinutes(totalHoursForCurrentMonth()))
+                    .font(.system(size: 16, weight: .medium))
+                    .padding(.bottom)
+            }
         }
         .padding()
         .background(Colors.backgroundColor)
@@ -130,6 +144,18 @@ struct HoursView: View {
         formatter.locale = Locale(identifier: "es_ES")
         formatter.dateStyle = .medium
         return formatter
+    }
+
+    private func totalHoursForCurrentMonth() -> Double {
+        let calendar = Calendar.current
+        let currentMonth = calendar.component(.month, from: Date())
+        let currentYear = calendar.component(.year, from: Date())
+
+        return workingHours.filter { entry in
+            let entryMonth = calendar.component(.month, from: entry.date)
+            let entryYear = calendar.component(.year, from: entry.date)
+            return entryMonth == currentMonth && entryYear == currentYear
+        }.reduce(0) { $0 + $1.hours }
     }
 }
 

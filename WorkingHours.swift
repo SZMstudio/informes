@@ -1,7 +1,7 @@
 import Foundation
+import SwiftUI // Importar SwiftUI para usar el tipo `Color`
 
-struct WorkingHours: Identifiable {
-    let id = UUID()
-    let date: Date
+struct WorkingHours {
+    var date: Date
     var hours: Double
 }

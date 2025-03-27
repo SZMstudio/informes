@@ -6,6 +6,13 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		657F26D32D95FC7E00561A4F /* WorkingHours.swift in Sources */ = {isa = PBXBuildFile; fileRef = 657F26D22D95FC7E00561A4F /* WorkingHours.swift */; };
+		657F26D92D95FF0A00561A4F /* HoursView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 657F26D82D95FF0A00561A4F /* HoursView.swift */; };
+		657F26DB2D96069700561A4F /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 657F26DA2D96069700561A4F /* Colors.swift */; };
+		65887AF52D95F15300C39868 /* DateExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65887AF42D95F15300C39868 /* DateExtensions.swift */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXContainerItemProxy section */
 		65887AD42D95EE4F00C39868 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -24,9 +31,13 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		657F26D22D95FC7E00561A4F /* WorkingHours.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkingHours.swift; sourceTree = "<group>"; };
+		657F26D82D95FF0A00561A4F /* HoursView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HoursView.swift; sourceTree = "<group>"; };
+		657F26DA2D96069700561A4F /* Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
 		65887ABE2D95EE4D00C39868 /* Informes.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Informes.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		65887AD32D95EE4F00C39868 /* InformesTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = InformesTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		65887ADD2D95EE4F00C39868 /* InformesUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = InformesUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		65887AF42D95F15300C39868 /* DateExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateExtensions.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -75,6 +86,10 @@
 		65887AB52D95EE4D00C39868 = {
 			isa = PBXGroup;
 			children = (
+				657F26DA2D96069700561A4F /* Colors.swift */,
+				657F26D82D95FF0A00561A4F /* HoursView.swift */,
+				657F26D22D95FC7E00561A4F /* WorkingHours.swift */,
+				65887AF42D95F15300C39868 /* DateExtensions.swift */,
 				65887AC02D95EE4D00C39868 /* Informes */,
 				65887AD62D95EE4F00C39868 /* InformesTests */,
 				65887AE02D95EE4F00C39868 /* InformesUITests */,
@@ -236,6 +251,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				65887AF52D95F15300C39868 /* DateExtensions.swift in Sources */,
+				657F26DB2D96069700561A4F /* Colors.swift in Sources */,
+				657F26D92D95FF0A00561A4F /* HoursView.swift in Sources */,
+				657F26D32D95FC7E00561A4F /* WorkingHours.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -396,6 +415,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Informes/Preview Content\"";
+				DEVELOPMENT_TEAM = W973V2TPNU;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -424,6 +444,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Informes/Preview Content\"";
+				DEVELOPMENT_TEAM = W973V2TPNU;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;

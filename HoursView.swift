@@ -8,85 +8,102 @@ struct HoursView: View {
     @FocusState private var isTextFieldFocused: Bool
 
     var body: some View {
-        VStack {
-            TextField("Ingrese horas y minutos (H,MM)", text: $hoursText)
-                .keyboardType(.decimalPad)
-                .padding()
-                .background(Colors.backgroundColor)
-                .cornerRadius(8)
-                .padding(.horizontal)
-                .font(.system(size: 18, weight: .medium))
-                .focused($isTextFieldFocused)
-                .onSubmit {
-                    dismissKeyboard()
-                }
-
-            Button(action: {
-                addHours()
-                dismissKeyboard()
-            }) {
-                Text(isEditing ? "Actualizar Horas" : "Agregar Horas")
-                    .foregroundColor(Colors.buttonTextColor)
-                    .padding()
-                    .background(Colors.buttonColor)
-                    .cornerRadius(8)
-                    .font(.system(size: 18, weight: .bold))
-            }
-            .padding()
-
-            List {
-                ForEach(workingHours.indices, id: \.self) { index in
-                    HStack {
-                        Text(workingHours[index].date, formatter: dateFormatter)
-                            .font(.system(size: 16, weight: .medium))
-                        Spacer()
-                        Text(formatHoursAndMinutes(workingHours[index].hours))
-                            .font(.system(size: 16, weight: .medium))
-                    }
-                    .padding(.vertical, 5)
-                    .swipeActions(edge: .trailing) {
-                        Button(role: .destructive) {
-                            deleteItem(at: index)
-                        } label: {
-                            Label("Borrar", systemImage: "trash")
-                        }
-                    }
-                    .swipeActions(edge: .leading) {
-                        Button {
-                            startEditing(at: index)
-                            isTextFieldFocused = true
-                        } label: {
-                            Label("Editar", systemImage: "pencil")
-                        }
-                        .tint(Colors.secondaryColor)
-                    }
-                }
-                .onMove(perform: moveItems)
-            }
-            .toolbar {
-                EditButton()
-            }
-
-            // Recuadro para el total de horas del mes actual
+        NavigationStack {
             VStack {
-                Text("TOTAL")
-                    .font(.system(size: 18, weight: .bold))
+                TextField("Ingrese horas y minutos (H,MM)", text: $hoursText)
+                    .keyboardType(.decimalPad)
                     .padding()
-                    .background(Color(hex: "e9edc9"))
+                    .background(Colors.backgroundColor)
                     .cornerRadius(8)
                     .padding(.horizontal)
-                
-                Text(formatHoursAndMinutes(totalHoursForCurrentMonth()))
-                    .font(.system(size: 16, weight: .medium))
-                    .padding(.bottom)
+                    .font(.system(size: 18, weight: .medium))
+                    .focused($isTextFieldFocused)
+                    .onSubmit {
+                        dismissKeyboard()
+                    }
+
+                HStack {
+                    Button(action: {
+                        addHours()
+                        dismissKeyboard()
+                    }) {
+                        Text(isEditing ? "Actualizar Horas" : "Agregar Horas")
+                            .foregroundColor(Colors.buttonTextColor)
+                            .padding()
+                            .background(Colors.buttonColor)
+                            .cornerRadius(8)
+                            .font(.system(size: 18, weight: .bold))
+                    }
+                    .padding()
+                    
+                    NavigationLink(destination: TotalsView(totalHours: totalHoursForCurrentMonth())) {
+                        Text("Totales")
+                            .foregroundColor(Colors.buttonTextColor)
+                            .padding()
+                            .background(Colors.buttonColor)
+                            .cornerRadius(8)
+                            .font(.system(size: 18, weight: .bold))
+                    }
+                    .padding()
+                }
+
+                List {
+                    ForEach(workingHours.indices, id: \.self) { index in
+                        HStack {
+                            Text(workingHours[index].date, formatter: dateFormatter)
+                                .font(.system(size: 16, weight: .medium))
+                            Spacer()
+                            Text(formatHoursAndMinutes(workingHours[index].hours))
+                                .font(.system(size: 16, weight: .medium))
+                        }
+                        .padding(.vertical, 5)
+                        .swipeActions(edge: .trailing) {
+                            Button(role: .destructive) {
+                                deleteItem(at: index)
+                            } label: {
+                                Label("Borrar", systemImage: "trash")
+                            }
+                        }
+                        .swipeActions(edge: .leading) {
+                            Button {
+                                startEditing(at: index)
+                                isTextFieldFocused = true
+                            } label: {
+                                Label("Editar", systemImage: "pencil")
+                            }
+                            .tint(Colors.secondaryColor)
+                        }
+                    }
+                    .onMove(perform: moveItems)
+                }
+
+                // Recuadro para el total de horas del mes actual
+                VStack {
+                    Text("TOTAL")
+                        .font(.system(size: 18, weight: .bold))
+                        .padding()
+                        .background(Color(hex: "e9edc9"))
+                        .cornerRadius(8)
+                        .padding(.horizontal)
+
+                    Text(formatHoursAndMinutes(totalHoursForCurrentMonth()))
+                        .font(.system(size: 16, weight: .medium))
+                        .padding(.bottom)
+                    
+                    // Cálculo de horas restantes para llegar a 50
+                    let remainingHours = max(50 - totalHoursForCurrentMonth(), 0)
+                    Text("Faltan \(formatHoursAndMinutes(remainingHours)) horas para llegar a 50")
+                        .font(.system(size: 16, weight: .medium))
+                        .padding(.bottom)
+                }
             }
+            .padding()
+            .background(Colors.backgroundColor)
         }
-        .padding()
-        .background(Colors.backgroundColor)
     }
 
     private func addHours() {
-        guard let hours = convertToDecimalHours(hoursText) else {
+        guard !hoursText.isEmpty, let hours = convertToDecimalHours(hoursText) else {
             // Manejar entrada inválida
             return
         }
@@ -104,10 +121,16 @@ struct HoursView: View {
 
     private func convertToDecimalHours(_ timeString: String) -> Double? {
         let components = timeString.split(separator: ",")
-        guard components.count == 2,
-              let hours = Double(components[0]),
-              let minutes = Double(components[1]),
-              minutes >= 0 && minutes < 60 else {
+        guard let hours = Double(components[0]) else {
+            return nil
+        }
+
+        if components.count == 1 {
+            // Solo se introdujo la hora, sin minutos
+            return hours
+        }
+
+        guard let minutes = Double(components[1]), minutes >= 0 && minutes < 60 else {
             return nil
         }
         // Convertir los minutos a horas decimales
@@ -119,7 +142,7 @@ struct HoursView: View {
         let totalMinutes = Int(hours * 60)
         let hours = totalMinutes / 60
         let minutes = totalMinutes % 60
-        return String(format: "%d horas y %02d minutos", hours, minutes)
+        return String(format: "%d:%02d", hours, minutes)
     }
 
     private func startEditing(at index: Int) {

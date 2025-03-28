@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6516ACB92D96A2CE0009F941 /* TotalsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6516ACB82D96A2CE0009F941 /* TotalsView.swift */; };
+		6516ACBB2D96A2FA0009F941 /* MonthlyTotalsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6516ACBA2D96A2FA0009F941 /* MonthlyTotalsView.swift */; };
 		657F26D32D95FC7E00561A4F /* WorkingHours.swift in Sources */ = {isa = PBXBuildFile; fileRef = 657F26D22D95FC7E00561A4F /* WorkingHours.swift */; };
 		657F26D92D95FF0A00561A4F /* HoursView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 657F26D82D95FF0A00561A4F /* HoursView.swift */; };
 		657F26DB2D96069700561A4F /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 657F26DA2D96069700561A4F /* Colors.swift */; };
@@ -31,6 +33,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		6516ACB82D96A2CE0009F941 /* TotalsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TotalsView.swift; sourceTree = "<group>"; };
+		6516ACBA2D96A2FA0009F941 /* MonthlyTotalsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonthlyTotalsView.swift; sourceTree = "<group>"; };
 		657F26D22D95FC7E00561A4F /* WorkingHours.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkingHours.swift; sourceTree = "<group>"; };
 		657F26D82D95FF0A00561A4F /* HoursView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HoursView.swift; sourceTree = "<group>"; };
 		657F26DA2D96069700561A4F /* Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
@@ -86,6 +90,8 @@
 		65887AB52D95EE4D00C39868 = {
 			isa = PBXGroup;
 			children = (
+				6516ACBA2D96A2FA0009F941 /* MonthlyTotalsView.swift */,
+				6516ACB82D96A2CE0009F941 /* TotalsView.swift */,
 				657F26DA2D96069700561A4F /* Colors.swift */,
 				657F26D82D95FF0A00561A4F /* HoursView.swift */,
 				657F26D22D95FC7E00561A4F /* WorkingHours.swift */,
@@ -251,6 +257,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6516ACBB2D96A2FA0009F941 /* MonthlyTotalsView.swift in Sources */,
+				6516ACB92D96A2CE0009F941 /* TotalsView.swift in Sources */,
 				65887AF52D95F15300C39868 /* DateExtensions.swift in Sources */,
 				657F26DB2D96069700561A4F /* Colors.swift in Sources */,
 				657F26D92D95FF0A00561A4F /* HoursView.swift in Sources */,
